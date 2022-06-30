@@ -9,5 +9,5 @@ RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # Stage 2: Serve app with nginx server
 FROM nginx:1.23.0
-COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
+COPY --from=build /app/dist/out/ /usr/share/nginx/html
 EXPOSE 80
