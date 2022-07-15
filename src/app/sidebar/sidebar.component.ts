@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../auth/authentication-service';
 
 declare const $: any;
 
@@ -12,6 +13,7 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     {path: '/new', title: 'New T-route', icon: 'pe-7s-graph', class: ''},
     {path: '/logout', title: 'Log out', icon: 'pe-7s-plug', class: 'active-pro'},
+    {path: '/user', title: 'User Profile', icon: 'pe-7s-user', class: ''},
 ];
 
 @Component({
@@ -20,12 +22,21 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
     menuItems: any[];
+    static logoutFunction: () => void;
 
-    constructor() {
+
+    constructor(private authenticationService: AuthenticationService) {
+
     }
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+    }
+
+    onClick($event: MouseEvent, menuItem: RouteInfo) {
+        if (menuItem.path == '/logout') {
+            this.authenticationService.logout()
+        }
     }
 
     isMobileMenu() {

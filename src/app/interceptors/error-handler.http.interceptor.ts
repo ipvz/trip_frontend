@@ -15,26 +15,22 @@ export class ErrorHandlerHttpInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        const authReq = req.clone({
-            headers: req.headers.set('Session', '123456789'),
-        })
+        logger.request(req.url, req.body)
 
-        req?.body ? logger.request(req.body) : null
-
-        return next.handle(authReq).pipe(
+        return next.handle(req).pipe(
             tap(
                 (event) => {
                     if (event instanceof HttpResponse) {
-                        logger.response(event.body)
+                        logger.response(event.url, event.body)
                     }
                 },
                 (err) => {
+                    logger.error(err)
                     if (err instanceof HttpErrorResponse) {
                         if (err.status == 401) {
-                            logger.error(err)
-                            notifications.showNotificationWarn("Необходимо авторизоваться")
+                            notifications.showNotificationWarn("Login required")
                         }
-                        notifications.showNotificationError(err?.message ? "Ошибка: " + err.message : "Неизвестная ошибка")
+                        notifications.showNotificationError(err?.message ? "Error: " + err.message : "Unknown error")
                     }
                 }
             )

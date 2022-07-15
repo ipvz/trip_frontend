@@ -1,6 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 
@@ -13,11 +13,13 @@ import {AppComponent} from './app.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {HomeComponent} from './home/home.component';
 import {ErrorHandlerHttpInterceptor} from './interceptors/error-handler.http.interceptor';
+import {BackendClient, MockBackendClient} from './client/backend-client';
+import {LoginComponent} from './auth/login.component';
 
 @NgModule({
     imports: [
         BrowserAnimationsModule,
-        FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         HttpClientModule,
         NavbarModule,
@@ -26,7 +28,8 @@ import {ErrorHandlerHttpInterceptor} from './interceptors/error-handler.http.int
     ],
     declarations: [
         AppComponent,
-        AdminLayoutComponent
+        AdminLayoutComponent,
+        LoginComponent
     ],
     providers: [
         HomeComponent,
@@ -34,6 +37,10 @@ import {ErrorHandlerHttpInterceptor} from './interceptors/error-handler.http.int
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorHandlerHttpInterceptor,
             multi: true,
+        },
+        {
+            provide: BackendClient,
+            useClass: MockBackendClient
         }
     ],
     bootstrap: [AppComponent]

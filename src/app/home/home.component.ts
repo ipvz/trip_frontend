@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {RouteBasicModel} from '../model/routeBasicModel';
-import {RouteDto} from '../model/dto';
 import notifications from '../utils/notifications';
+import {BackendClient} from '../client/backend-client';
 
 declare var ymaps: any;
 
@@ -15,11 +14,11 @@ export class HomeComponent implements OnInit {
 
     route
 
-    constructor(private http: HttpClient) {
+    constructor(private backendClient: BackendClient) {
     }
 
     ngOnInit() {
-        this.http.get<RouteDto>('assets/json/coords.json')
+        this.backendClient.getCoords()
             .toPromise()
             .then((data) => this.route = new RouteBasicModel(data.name, data.description, data.coords))
             .then((data) => notifications.showNotificationInfo("Загружен маршрут \"" + data.name + "\""))

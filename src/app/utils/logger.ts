@@ -17,19 +17,23 @@ class Logger {
         );
     }
 
-    public request(...args: any) {
+    public request(url: string, ...args: any) {
         console.log(
             '%c REQUEST ',
             'background: green; border-radius: 12px; padding: 4px; color: white; font-weight: 900',
+            '\n',
+            `url: ${url}`,
             '\n',
             ...args
         );
     }
 
-    public response(...args: any) {
+    public response(url: string, ...args: any) {
         console.log(
             '%c RESPONSE ',
             'background: black; border-radius: 12px; padding: 4px; color: white; font-weight: 900',
+            '\n',
+            `url: ${url}`,
             '\n',
             ...args
         );

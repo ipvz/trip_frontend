@@ -1,0 +1,8 @@
+{
+  "username": "test-user",
+  "password": "password",
+  "firstName": "Владимир",
+  "lastName": "Жмаков",
+  "accessToken": "123access123",
+  "refreshToken": "456refresh456"
+}
