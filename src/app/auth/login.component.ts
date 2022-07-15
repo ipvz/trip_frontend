@@ -32,8 +32,16 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[^\\W_]{6,}$')],
-            password: ['', Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[^\\W_]{6,}$')]
+            username: ['', [
+                Validators.required,
+                Validators.pattern('^[A-Za-z][A-Za-z0-9_]*$'),
+                Validators.minLength(3),
+                Validators.maxLength(30)]],
+            password: ['', [
+                Validators.required,
+                Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[^\\W_]*$'),
+                Validators.minLength(6),
+                Validators.maxLength(500)]]
         });
 
         // get return url from route parameters or default to '/'
@@ -41,7 +49,9 @@ export class LoginComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    get f() {
+        return this.loginForm.controls;
+    }
 
     onSubmit() {
         this.submitted = true;
