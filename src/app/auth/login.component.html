@@ -24,12 +24,13 @@
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required">Password is required</div>
                     <div *ngIf="f.password.errors.minlength">Password must be more than 6 characters</div>
-                    <div *ngIf="f.password.errors.maxlength">Password must be less than 500 characters</div>
+                    <div *ngIf="f.password.errors.maxlength">Password must be less than 100 characters</div>
                     <div *ngIf="f.password.errors.pattern">
-                        The password must:
-                        contains a lowercase letter,
-                        contains a capital letter,
-                        contains a number
+                        The password must contains at least one:
+                        lowercase letter,
+                        capital letter,
+                        number,
+                        special symbol
                     </div>
                 </div>
             </div>

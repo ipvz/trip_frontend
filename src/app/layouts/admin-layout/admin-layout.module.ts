@@ -6,7 +6,6 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AdminLayoutRoutes} from './admin-layout.routing';
 
 import {HomeComponent} from '../../home/home.component';
-import {LoginComponent} from '../../auth/login.component';
 
 @NgModule({
     imports: [
@@ -15,8 +14,7 @@ import {LoginComponent} from '../../auth/login.component';
         ReactiveFormsModule
     ],
     declarations: [
-        HomeComponent,
-        LoginComponent
+        HomeComponent
     ]
 })
 export class AdminLayoutModule {

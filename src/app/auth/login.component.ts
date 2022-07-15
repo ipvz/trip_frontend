@@ -3,7 +3,6 @@ import {BackendClient} from '../client/backend-client';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from './authentication-service';
-import notifications from '../utils/notifications';
 import {first} from 'rxjs/operators';
 
 @Component({
@@ -39,9 +38,9 @@ export class LoginComponent implements OnInit {
                 Validators.maxLength(30)]],
             password: ['', [
                 Validators.required,
-                Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[^\\W_]*$'),
+                Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%_*\\-#?&])[A-Za-z\\d@$!%_*\\-#?&]*$'),
                 Validators.minLength(6),
-                Validators.maxLength(500)]]
+                Validators.maxLength(100)]]
         });
 
         // get return url from route parameters or default to '/'
@@ -66,7 +65,6 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    console.log(localStorage.getItem('currentUser'));
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {

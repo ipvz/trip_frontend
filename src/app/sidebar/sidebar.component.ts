@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../auth/authentication-service';
+import {Router} from '@angular/router';
 
 declare const $: any;
 
@@ -25,8 +26,10 @@ export class SidebarComponent implements OnInit {
     static logoutFunction: () => void;
 
 
-    constructor(private authenticationService: AuthenticationService) {
-
+    constructor(
+        private authenticationService: AuthenticationService,
+        private router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -36,6 +39,7 @@ export class SidebarComponent implements OnInit {
     onClick($event: MouseEvent, menuItem: RouteInfo) {
         if (menuItem.path == '/logout') {
             this.authenticationService.logout()
+            this.router.navigate(['/login'])
         }
     }
 

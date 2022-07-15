@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../auth/authentication-service';
+import {BackendClient} from '../client/backend-client';
+import {UserInfo} from '../model/userLogin';
 
 @Component({
     selector: 'app-user',
@@ -6,11 +9,22 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+    userInfo: UserInfo;
 
-    constructor() {
+    constructor(
+        private authenticationService: AuthenticationService,
+        private backendClient: BackendClient) {
     }
 
     ngOnInit() {
+        this.backendClient.getUserInfo(this.authenticationService.currentUserValue.username)
+            .subscribe(
+                user => {
+                    this.userInfo = user;
+                },
+                error => {
+                }
+            )
     }
 
 }
