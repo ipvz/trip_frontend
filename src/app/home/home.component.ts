@@ -21,11 +21,8 @@ export class HomeComponent implements OnInit {
         this.backendClient.getCoords()
             .toPromise()
             .then((data) => this.route = new RouteBasicModel(data.name, data.description, data.coords))
-            .then((data) => notifications.showNotificationInfo("Загружен маршрут \"" + data.name + "\""))
-
-        ymaps.ready().then(() => {
-            this.init()
-        });
+            .then((data) => notifications.showNotificationInfo('Загружен маршрут "' + data.name + '"'))
+            .then(() => ymaps.ready().then(() => this.init()))
     }
 
     init() {
