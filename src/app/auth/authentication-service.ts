@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {UserLogin} from '../model/userLogin';
+import {UserAccess} from '../model/userAccess';
 import {BackendClient} from '../client/backend-client';
 
 
@@ -9,15 +9,15 @@ const LOCAL_STORAGE_USER_KEY = 'currentUser'
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<UserLogin>;
-    public currentUser: Observable<UserLogin>;
+    private currentUserSubject: BehaviorSubject<UserAccess>;
+    public currentUser: Observable<UserAccess>;
 
     constructor(private backendClient: BackendClient) {
-        this.currentUserSubject = new BehaviorSubject<UserLogin>(JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY)));
+        this.currentUserSubject = new BehaviorSubject<UserAccess>(JSON.parse(localStorage.getItem(LOCAL_STORAGE_USER_KEY)));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): UserLogin {
+    public get currentUserValue(): UserAccess {
         return this.currentUserSubject.value;
     }
 

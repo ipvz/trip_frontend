@@ -1,6 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 
@@ -13,8 +13,10 @@ import {AppComponent} from './app.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {HomeComponent} from './home/home.component';
 import {ErrorHandlerHttpInterceptor} from './interceptors/error-handler.http.interceptor';
-import {BackendClient, MockBackendClient} from './client/backend-client';
+import {ApiBackendClient, BackendClient, MockBackendClient} from './client/backend-client';
 import {LoginComponent} from './auth/login.component';
+import {environment} from '../environments/environment';
+import {RegisterComponent} from './auth/register/register.component';
 
 @NgModule({
     imports: [
@@ -29,7 +31,8 @@ import {LoginComponent} from './auth/login.component';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [
         HomeComponent,
@@ -40,7 +43,7 @@ import {LoginComponent} from './auth/login.component';
         },
         {
             provide: BackendClient,
-            useClass: MockBackendClient
+            useClass: environment.production ? ApiBackendClient : MockBackendClient
         }
     ],
     bootstrap: [AppComponent]

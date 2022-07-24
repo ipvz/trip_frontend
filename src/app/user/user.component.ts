@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../auth/authentication-service';
 import {BackendClient} from '../client/backend-client';
-import {UserInfo} from '../model/userLogin';
+import {UserInfo} from '../model/userAccess';
 
 @Component({
     selector: 'app-user',

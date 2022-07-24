@@ -6,11 +6,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {LoginComponent} from './auth/login.component';
 import {AuthGuard} from './auth/auth-guard';
+import {RegisterComponent} from './auth/register/register.component';
 
 const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'register',
+        component: RegisterComponent
     },
     {
         path: '',

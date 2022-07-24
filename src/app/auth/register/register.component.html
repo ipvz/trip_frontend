@@ -1,0 +1,111 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Register Form</h4>
+                    </div>
+                    <div class="content">
+                        <form [formGroup]="registerForm" (ngSubmit)="update()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="username">Username*</label>
+                                        <input id="username" type="text" formControlName="username" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                                        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                            <div *ngIf="f.username.errors.required">Username is required</div>
+                                            <div *ngIf="f.username.errors.minlength">Username must be more than 3 characters</div>
+                                            <div *ngIf="f.username.errors.maxlength">Username must be less than 30 characters</div>
+                                            <div *ngIf="f.username.errors.pattern">
+                                                Username requirements:
+                                                a valid username should start with an alphabet,
+                                                all other characters can be alphabets, numbers or an underscore
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="email">Email address*</label>
+                                        <input id="email" type="email" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.email">Incorrect email</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Password*</label>
+                                        <input type="password" formControlName="password" class="form-control" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">Password is required</div>
+                                            <div *ngIf="f.password.errors.minlength">Password must be more than characters</div>
+                                            <div *ngIf="f.password.errors.maxlength">Password must be less than 100 characters</div>
+                                            <div *ngIf="f.password.errors.pattern">
+                                                The password must contains at least one:
+                                                lowercase letter,
+                                                capital letter,
+                                                number,
+                                                special symbol
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="confirmPassword">Confirm Password*</label>
+                                        <input id="confirmPassword" type="password" formControlName="confirmPassword" class="form-control" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && this.registerForm.errors?.notSame }">
+                                        <div *ngIf="submitted && this.registerForm.errors?.notSame" class="invalid-feedback">
+                                            <div *ngIf="registerForm.errors?.notSame">Passwords do not match</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>About Me</label>
+                                        <textarea rows="5" class="form-control" formControlName="about" placeholder="Here can be your description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a routerLink="/login" class="btn btn-link">Back to login</a>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary">
+                                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
