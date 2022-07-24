@@ -7,7 +7,7 @@ COPY ./src /app/src
 COPY ./angular.json /app/
 COPY ./protractor.conf.js /app/
 COPY ./typings.json /app/
-RUN npm run build -- --output-path=./dist/out
+RUN npm run build -- --output-path=./dist/out --prod
 
 # Stage 2: Serve app with nginx server
 FROM nginx:1.23.0
