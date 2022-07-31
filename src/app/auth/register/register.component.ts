@@ -80,11 +80,10 @@ export class RegisterComponent implements OnInit {
         let formData = this.registerForm.value
         formData.confirmPassword = undefined
 
-        console.log(JSON.stringify(formData))
-
         this.backendClient
             .register(plainToInstance(UserInfo, formData))
             .subscribe(() => {
+                    console.log("REGISTERED")
                     notifications.showNotificationSuccess('Registered!');
                     this.router.navigate(['/'])
                 },

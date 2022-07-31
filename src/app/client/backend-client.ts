@@ -27,7 +27,6 @@ export class MockBackendClient implements BackendClient {
     }
 
     register(userInfo: UserInfo): Observable<Object> {
-        console.log(JSON.stringify(userInfo))
         return new Observable<Object>()
     }
 
