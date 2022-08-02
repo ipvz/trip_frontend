@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from './authentication-service';
 import {first} from 'rxjs/operators';
+import notifications from '../utils/notifications';
 
 @Component({
     selector: 'app-login',
@@ -61,10 +62,15 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+
+        const username = this.f.username.value;
+        const password = this.f.password.value;
+
+        this.authenticationService.login(username, password)
             .pipe(first())
             .subscribe(
                 data => {
+                    notifications.showNotificationSuccess(`Hello, ${username}!`)
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {

@@ -27,9 +27,6 @@ export class ErrorHandlerHttpInterceptor implements HttpInterceptor {
                 (err) => {
                     logger.error(err)
                     if (err instanceof HttpErrorResponse) {
-                        if (err.status == 401) {
-                            notifications.showNotificationWarn("Login required")
-                        }
                         notifications.showNotificationError(err?.message ? "Error: " + err.message : "Unknown error")
                     }
                 }
