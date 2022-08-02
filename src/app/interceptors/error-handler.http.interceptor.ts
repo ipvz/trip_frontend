@@ -27,7 +27,7 @@ export class ErrorHandlerHttpInterceptor implements HttpInterceptor {
                 (err) => {
                     logger.error(err)
                     if (err instanceof HttpErrorResponse) {
-                        notifications.showNotificationError(err?.message ? "Error: " + err.message : "Unknown error")
+                        notifications.showNotificationError(err?.error?.message ? err.error.message : err.message)
                     }
                 }
             )
